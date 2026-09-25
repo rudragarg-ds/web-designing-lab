@@ -1,0 +1,167 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f9fc;
+    color: #222;
+}
+
+/* Navigation */
+nav {
+    background-color: #111827;
+    padding: 18px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #a52424;
+}
+
+/* Home */
+#home {
+    text-align: center;
+    padding: 100px 20px;
+    background: linear-gradient(135deg, #111827, #a52424);
+    color: white;
+}
+
+#home h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+#home p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* Common section styling */
+section {
+    padding: 60px 30px;
+}
+
+section h2 {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 30px;
+}
+
+/* About */
+#about {
+    background-color: white;
+}
+
+#about p {
+    max-width: 700px;
+    margin: 15px auto;
+    line-height: 1.7;
+}
+
+#about h3 {
+    text-align: center;
+    margin-top: 30px;
+}
+
+#about ul {
+    max-width: 500px;
+    margin: auto;
+    line-height: 1.8;
+}
+
+/* Projects */
+#projects {
+    background-color: #f7f9fc;
+    text-align: center;
+}
+
+.projects-container {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.project-card {
+    width: 250px;
+    padding: 25px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: 0.3s;
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.project-card h3 {
+    color: #2563eb;
+}
+
+.project-card p {
+    line-height: 1.6;
+}
+
+/* Contact */
+#contact {
+    background-color: white;
+}
+
+#contact form {
+    max-width: 500px;
+    margin: auto;
+}
+
+#contact input,
+#contact textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+#contact button {
+    background-color: #171718;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#contact button:hover {
+    background-color: #171718;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    nav a {
+        display: block;
+        margin: 10px 0;
+    }
+
+    #home h1 {
+        font-size: 36px;
+    }
+
+    .project-card {
+        width: 90%;
+    }
+}
