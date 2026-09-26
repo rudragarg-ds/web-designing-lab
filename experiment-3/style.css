@@ -1,0 +1,127 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    padding: 40px 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f2f4f7;
+    color: #222;
+}
+.app {
+    max-width: 550px;
+    margin: 40px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+.top {
+    margin-bottom: 25px;
+}
+h1 {
+    margin: 0 0 5px;
+    font-size: 32px;
+}
+#taskCount {
+    margin: 0;
+    color: #777;
+    font-size: 14px;
+}
+#taskForm {
+    display: flex;
+    gap: 10px;
+}
+#taskInput {
+    flex: 1;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    outline: none;
+}
+#taskInput:focus {
+    border-color: #333;
+}
+#addButton {
+    padding: 12px 16px;
+    border: none;
+    background-color: #222;
+    color: white;
+    border-radius: 7px;
+    cursor: pointer;
+}
+#addButton:hover {
+    background-color: #444;
+}
+.task-options {
+    text-align: right;
+    margin-top: 15px;
+}
+#clearCompleted {
+    border: none;
+    background: none;
+    color: #777;
+    cursor: pointer;
+}
+#clearCompleted:hover {
+    color: #222;
+}
+#taskList {
+    list-style: none;
+    padding: 0;
+    margin: 25px 0 0;
+}
+#taskList li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding: 14px;
+    margin-bottom: 10px;
+    background-color: #f8f8f8;
+    border: 1px solid #e2e2e2;
+    border-radius: 8px;
+    cursor: pointer;
+}
+#taskList li:hover {
+    background-color: #f0f0f0;
+}
+#taskList li span {
+    flex: 1;
+}
+#taskList li button {
+    padding: 7px 10px;
+    border: none;
+    background-color: #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#taskList li button:hover {
+    background-color: #c8c8c8;
+}
+.completed span {
+    text-decoration: line-through;
+    color: #888;
+}
+.empty-message {
+    text-align: center;
+    color: #999;
+    margin-top: 30px;
+    font-size: 14px;
+}
+@media (max-width: 600px) {
+    body {
+        padding: 20px 10px;
+    }
+    .app {
+        margin: 20px auto;
+        padding: 20px;
+    }
+    #taskForm {
+        flex-direction: column;
+    }
+    #addButton {
+        width: 100%;
+    }
+}
