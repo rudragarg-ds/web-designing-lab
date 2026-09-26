@@ -5,14 +5,15 @@ html {
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
     background-color: #f7f9fc;
     color: #222;
 }
 
+
 /* Navigation */
+
 nav {
-    background-color: #111827;
+    background-color: #66063b;
     padding: 18px;
     text-align: center;
     position: sticky;
@@ -22,70 +23,120 @@ nav {
 
 nav a {
     color: white;
-    margin: 0 15px;
+    margin: 0 12px;
     text-decoration: none;
     font-weight: bold;
 }
 
 nav a:hover {
-    color: #a52424;
+    color: #850f22;
 }
 
+
 /* Home */
+
 #home {
     text-align: center;
-    padding: 100px 20px;
-    background: linear-gradient(135deg, #111827, #a52424);
+    padding: 110px 20px;
+    background: linear-gradient(135deg, #66063b, #850f22);
     color: white;
 }
 
 #home h1 {
-    font-size: 48px;
-    margin-bottom: 10px;
+    font-size: 50px;
+    margin: 10px 0;
 }
 
 #home p {
-    font-size: 18px;
+    font-size: 19px;
     line-height: 1.6;
 }
 
-/* Common section styling */
+.intro {
+    color: #febfc9;
+    font-weight: bold;
+}
+
+.button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 25px;
+    background-color: white;
+    color: #2563eb;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.button:hover {
+    background-color: #dbeafe;
+}
+
+
+/* Sections */
+
 section {
-    padding: 60px 30px;
+    padding: 70px 30px;
 }
 
 section h2 {
     text-align: center;
-    font-size: 30px;
-    margin-bottom: 30px;
+    font-size: 32px;
+    margin-bottom: 35px;
 }
 
+
 /* About */
+
 #about {
     background-color: white;
 }
 
 #about p {
-    max-width: 700px;
-    margin: 15px auto;
+    max-width: 750px;
+    margin: 18px auto;
     line-height: 1.7;
 }
 
-#about h3 {
-    text-align: center;
-    margin-top: 30px;
+
+/* Experience */
+
+#experience {
+    background-color: #f7f9fc;
 }
 
-#about ul {
-    max-width: 500px;
-    margin: auto;
-    line-height: 1.8;
+.experience-card {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 25px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
+
+.experience-card h3 {
+    margin-bottom: 5px;
+    color: #850f22;
+}
+
+.experience-card h4 {
+    margin: 5px 0;
+}
+
+.date {
+    color: #666;
+    font-size: 14px;
+}
+
+.experience-card li {
+    margin-bottom: 8px;
+}
+
 
 /* Projects */
+
 #projects {
-    background-color: #f7f9fc;
-    text-align: center;
+    background-color: white;
 }
 
 .projects-container {
@@ -96,9 +147,9 @@ section h2 {
 }
 
 .project-card {
-    width: 250px;
+    width: 260px;
     padding: 25px;
-    background-color: white;
+    background-color: #f7f9fc;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     transition: 0.3s;
@@ -106,25 +157,68 @@ section h2 {
 
 .project-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .project-card h3 {
-    color: #2563eb;
+    color: #aa791d;
 }
 
 .project-card p {
     line-height: 1.6;
 }
 
+.tech {
+    font-size: 14px;
+    color: #555;
+    font-weight: bold;
+}
+
+
+/* Skills */
+
+#skills {
+    background-color: #f7f9fc;
+}
+
+.skills-container {
+    max-width: 850px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.skills-container span {
+    background-color: white;
+    padding: 12px 18px;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+
 /* Contact */
+
 #contact {
     background-color: white;
+    text-align: center;
+}
+
+#contact > p {
+    max-width: 600px;
+    margin: 0 auto 30px;
+    line-height: 1.6;
 }
 
 #contact form {
     max-width: 500px;
     margin: auto;
+    text-align: left;
+}
+
+#contact label {
+    display: block;
+    margin-top: 15px;
 }
 
 #contact input,
@@ -138,20 +232,45 @@ section h2 {
 }
 
 #contact button {
-    background-color: #171718;
+    margin-top: 15px;
+    padding: 12px 25px;
+    background-color: #b911da;
     color: white;
     border: none;
-    padding: 12px 25px;
     border-radius: 6px;
     cursor: pointer;
 }
 
 #contact button:hover {
-    background-color: #171718;
+    background-color: #1dd8bf;
 }
 
+.links {
+    margin-top: 30px;
+}
+
+.links a {
+    margin: 0 10px;
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+/* Footer */
+
+footer {
+    background-color: #850f22;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+
 /* Mobile */
+
 @media (max-width: 600px) {
+
     nav a {
         display: block;
         margin: 10px 0;
@@ -159,6 +278,10 @@ section h2 {
 
     #home h1 {
         font-size: 36px;
+    }
+
+    section {
+        padding: 50px 20px;
     }
 
     .project-card {
