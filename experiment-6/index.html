@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Byte Journal</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="#top">Byte Journal</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#top">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#articles">Articles</a></li>
+        <li class="nav-item"><a class="nav-link" href="#featured">Featured</a></li>
+        <li class="nav-item"><a class="nav-link" href="#subscribe">Subscribe</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header class="hero bg-dark text-white" id="top">
+  <div class="container py-5">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <p class="hero-label">BYTE JOURNAL · TECHNOLOGY EXPLAINED</p>
+
+        <h1 class="display-5 fw-bold">Ideas that make technology easier to understand.</h1>
+
+        <p class="lead text-white-50">
+          Practical articles about coding, AI, web development and data, written in plain language.
+        </p>
+
+        <a href="#articles" class="btn btn-primary btn-lg me-2">Browse Articles</a>
+        <a href="#subscribe" class="btn btn-outline-light btn-lg">Subscribe</a>
+      </div>
+
+      <div class="col-lg-6 mt-4 mt-lg-0">
+        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=85" class="img-fluid rounded shadow" alt="Technology and computer circuitry">
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="py-5" id="featured">
+  <div class="container">
+
+    <div class="section-label">FEATURED STORY</div>
+
+    <div class="card shadow-sm border-0">
+      <div class="row g-0">
+
+        <div class="col-md-5">
+          <img src="https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&w=900&q=85" class="img-fluid featured-img" alt="Artificial intelligence technology">
+        </div>
+
+        <div class="col-md-7">
+          <div class="card-body p-4 p-lg-5">
+
+            <span class="badge bg-info text-dark mb-2">Featured · AI</span>
+
+            <h2 class="card-title">What "AI-powered" actually means in production</h2>
+
+            <p class="featured-intro">
+              AI in production is rarely about building a futuristic machine. It is about choosing the right problem, measuring whether the model actually helps, and knowing when a human should remain in control.
+            </p>
+
+            <div class="featured-meta">
+              <span>8 min read</span>
+              <span>•</span>
+              <span>AI & Technology</span>
+            </div>
+
+            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalFeatured">
+              Read Full Article
+            </button>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5 bg-light" id="articles">
+  <div class="container">
+
+    <div class="row align-items-center mb-4">
+      <div class="col-md-7">
+        <div class="section-label">EXPLORE</div>
+        <h2 class="fw-bold">Latest Articles</h2>
+        <p class="text-muted mb-0">Explore stories and tutorials about modern technology.</p>
+      </div>
+
+      <div class="col-md-5 mt-3 mt-md-0">
+        <input type="text" id="searchInput" class="form-control" placeholder="Search articles...">
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <button type="button" class="btn btn-outline-secondary btn-sm filter-btn active" data-category="all">All</button>
+      <button type="button" class="btn btn-outline-secondary btn-sm filter-btn" data-category="programming">Programming</button>
+      <button type="button" class="btn btn-outline-secondary btn-sm filter-btn" data-category="ai">AI</button>
+      <button type="button" class="btn btn-outline-secondary btn-sm filter-btn" data-category="web">Web Development</button>
+      <button type="button" class="btn btn-outline-secondary btn-sm filter-btn" data-category="data">Data Science</button>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="articleGrid">
+
+      <div class="col article-item" data-category="web">
+        <div class="card h-100 shadow-sm border-0 article-card">
+          <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=85" class="card-img-top" alt="Laptop displaying web development code">
+
+          <div class="card-body">
+            <span class="badge bg-success mb-2">Web Development</span>
+
+            <h5 class="card-title">Build Your First Modern Website</h5>
+
+            <p class="card-text text-muted">
+              Learn how HTML gives a page structure, CSS gives it personality, and responsive design makes the result work across different screen sizes.
+            </p>
+
+            <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modal1">
+              Read More
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col article-item" data-category="ai">
+        <div class="card h-100 shadow-sm border-0 article-card">
+          <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=85" class="card-img-top" alt="Robot representing artificial intelligence">
+
+          <div class="card-body">
+            <span class="badge bg-info text-dark mb-2">AI</span>
+
+            <h5 class="card-title">Understanding AI in Everyday Life</h5>
+
+            <p class="card-text text-muted">
+              From recommendations to chat assistants, AI is already making decisions around us. Learn what these systems actually do and where their predictions can go wrong.
+            </p>
+
+            <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modal2">
+              Read More
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col article-item" data-category="programming">
+        <div class="card h-100 shadow-sm border-0 article-card">
+          <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=800&q=85" class="card-img-top" alt="Python code displayed on a computer">
+
+          <div class="card-body">
+            <span class="badge bg-primary mb-2">Programming</span>
+
+            <h5 class="card-title">Why Python Is Everywhere</h5>
+
+            <p class="card-text text-muted">
+              Python powers everything from beginner projects to AI systems and data pipelines. Its simple syntax and huge ecosystem explain why it continues to dominate so many areas of technology.
+            </p>
+
+            <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modal3">
+              Read More
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col article-item" data-category="data">
+        <div class="card h-100 shadow-sm border-0 article-card">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=85" class="card-img-top" alt="Data visualization charts and graphs">
+
+          <div class="card-body">
+            <span class="badge bg-warning text-dark mb-2">Data Science</span>
+
+            <h5 class="card-title">How Data Turns Into Decisions</h5>
+
+            <p class="card-text text-muted">
+              Numbers alone rarely tell the whole story. Learn how cleaning, analysing and interpreting data can turn a spreadsheet into information people can actually use.
+            </p>
+
+            <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modal4">
+              Read More
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col article-item" data-category="web">
+        <div class="card h-100 shadow-sm border-0 article-card">
+          <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=85" class="card-img-top" alt="Website displayed across different devices">
+
+          <div class="card-body">
+            <span class="badge bg-success mb-2">Web Development</span>
+
+            <h5 class="card-title">Responsive Design Explained</h5>
+
+            <p class="card-text text-muted">
+              A website should not fall apart when someone opens it on a phone. Learn how Bootstrap grids and CSS media queries help layouts adapt to different screens.
+            </p>
+
+            <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modal5">
+              Read More
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col article-item" data-category="ai">
+        <div class="card h-100 shadow-sm border-0 article-card">
+          <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=85" class="card-img-top" alt="Artificial intelligence and machine learning concept">
+
+          <div class="card-body">
+            <span class="badge bg-info text-dark mb-2">AI</span>
+
+            <h5 class="card-title">Getting Started With Machine Learning</h5>
+
+            <p class="card-text text-muted">
+              Machine learning allows computers to find patterns in examples and use them to make predictions. Start with the basic idea before getting lost in complicated algorithms.
+            </p>
+
+            <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#modal6">
+              Read More
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="text-center text-muted mt-4 d-none" id="emptyState">
+      No articles match your search. Try a different word or category.
+    </p>
+
+  </div>
+</section>
+
+<section class="py-5 bg-dark text-white" id="subscribe">
+  <div class="container">
+    <div class="row align-items-center">
+
+      <div class="col-lg-6">
+        <div class="section-label subscribe-label">STAY UPDATED</div>
+        <h2 class="fw-bold">Get the latest tech stories.</h2>
+        <p class="text-white-50 mb-0">
+          One email whenever we publish something useful.
+        </p>
+      </div>
+
+      <div class="col-lg-6 mt-4 mt-lg-0">
+        <form id="subscribeForm" class="row g-2" novalidate>
+
+          <div class="col-sm-8">
+            <input type="email" id="emailInput" class="form-control" placeholder="Enter your email" required>
+          </div>
+
+          <div class="col-sm-4">
+            <button type="submit" class="btn btn-primary w-100">Subscribe</button>
+          </div>
+
+        </form>
+
+        <p id="message" class="mt-2 mb-0"></p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="bg-dark text-white-50 py-3 border-top border-secondary">
+  <div class="container d-flex flex-column flex-sm-row justify-content-between align-items-center text-center">
+    <p class="mb-0">&copy; 2026 Byte Journal</p>
+    <p class="mb-0">Web Designing Lab, Experiment 6</p>
+  </div>
+</footer>
+
+<div class="modal fade" id="modalFeatured" tabindex="-1" aria-hidden="true">
+
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+
+    <div class="modal-content featured-modal">
+
+      <div class="modal-header">
+        <div>
+          <span class="article-modal-label">FEATURED · AI</span>
+          <h5 class="modal-title">What "AI-powered" actually means in production</h5>
+          <p class="modal-meta">8 min read · Byte Journal · Technology</p>
+        </div>
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <img src="https://images.unsplash.com/photo-1555255707-c07966088b7b?auto=format&fit=crop&w=1200&q=85" class="featured-modal-image" alt="Artificial intelligence technology">
+
+        <div class="article-content">
+
+          <p class="article-lead">
+            The phrase "AI-powered" appears everywhere. Products use it, companies advertise it, and developers build around it. But behind the phrase, the reality is usually much simpler.
+          </p>
+
+          <h3>AI is usually one part of a larger system</h3>
+
+          <p>
+            When a company says a product is "AI-powered," it usually means one specific part of the product uses a machine learning model. The model might classify an image, recommend a product, generate text, detect an unusual transaction or predict what a user might do next.
+          </p>
+
+          <p>
+            The rest of the application is still ordinary software. There are databases, APIs, interfaces, business rules and people making decisions about how the system should behave.
+          </p>
+
+          <div class="article-callout">
+            <strong>The important question is not "Where can we use AI?"</strong>
+            <span>It is "Which problem becomes meaningfully better when we use AI?"</span>
+          </div>
+
+          <h3>Where AI actually earns its place</h3>
+
+          <p>
+            AI becomes useful when a task involves patterns that are difficult to describe with simple rules. A fraud detection system, for example, might look at thousands of transactions and identify combinations of behaviour that deserve attention.
+          </p>
+
+          <p>
+            A recommendation system can do something similar. Instead of manually writing a rule for every possible user, it can learn from previous interactions and estimate what content or product might be relevant next.
+          </p>
+
+          <p>
+            In both cases, the model is not replacing the entire system. It is solving one difficult part of the problem.
+          </p>
+
+          <h3>What happens when AI is used badly?</h3>
+
+          <p>
+            Problems usually begin when teams assume that adding a model automatically makes a product smarter. A model can be inaccurate, biased by its training data, confused by unusual inputs or simply unsuitable for the task.
+          </p>
+
+          <p>
+            This becomes especially important when an incorrect prediction has a real cost. A recommendation being slightly irrelevant is one thing. An incorrect medical, financial or security decision can be much more serious.
+          </p>
+
+          <h3>The human still matters</h3>
+
+          <p>
+            The strongest AI systems are often not completely autonomous. Instead, they combine automated predictions with clear rules, monitoring and human judgement.
+          </p>
+
+          <p>
+            A model can flag something unusual. A person can then decide whether that signal actually requires action. This approach allows teams to benefit from automation without pretending that the model is always correct.
+          </p>
+
+          <h3>Before building, define success</h3>
+
+          <p>
+            Before asking whether a project needs AI, define what success means. What should the system predict? How accurate does it need to be? What happens when it is wrong? How will performance be monitored after deployment?
+          </p>
+
+          <p>
+            These questions sound simple, but they often determine whether an AI feature becomes genuinely useful or just becomes another impressive label on a product page.
+          </p>
+
+          <div class="article-ending">
+            <span>KEY TAKEAWAY</span>
+            <p>
+              Good AI products are not defined by how much AI they contain. They are defined by whether the technology solves a real problem better than the alternatives.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="modal fade" id="modal1" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Build Your First Modern Website</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=85" class="img-fluid rounded mb-3" alt="Laptop displaying web development code">
+
+        <span class="badge bg-success mb-2">Web Development</span>
+
+        <p>
+          Every website starts with two files doing two different jobs. HTML holds the content — headings, paragraphs, images and links — arranged in a structure a browser can read.
+        </p>
+
+        <p>
+          CSS decides how that structure actually looks: colors, spacing, fonts and layout. Once these two roles become clear, building a website becomes much easier to understand.
+        </p>
+
+        <p>
+          A good way to learn this is backwards: take a page you like, open its HTML in your browser's developer tools and see which tags hold which content. Then look at the CSS rules attached to those tags.
+        </p>
+
+        <p>
+          Once that clicks, "modern" web design is really about choosing a simple layout, keeping spacing consistent and making sure the page works properly on smaller screens.
+        </p>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal2" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Understanding AI in Everyday Life</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&q=85" class="img-fluid rounded mb-3" alt="Robot representing artificial intelligence">
+
+        <span class="badge bg-info text-dark mb-2">AI</span>
+
+        <p>
+          Most people interact with AI several times a day without thinking of it as AI. Autocomplete, recommendation systems, photo organization and voice assistants all rely on models that identify patterns and make predictions.
+        </p>
+
+        <p>
+          What's changed recently is that AI has become much more conversational. Instead of quietly working in the background, modern AI tools allow users to directly interact with the system using natural language.
+        </p>
+
+        <p>
+          Understanding these systems does not require becoming a machine learning engineer. It simply helps to know that many AI systems are making predictions based on patterns rather than "thinking" in the same way humans do.
+        </p>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal3" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Why Python Is Everywhere</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=800&q=85" class="img-fluid rounded mb-3" alt="Python code displayed on a computer">
+
+        <span class="badge bg-primary mb-2">Programming</span>
+
+        <p>
+          Python is rarely the fastest language available, and it isn't the newest. What it has instead is readability and a massive library ecosystem for almost anything you would want to build.
+        </p>
+
+        <p>
+          That combination made it popular in education, automation, web development, data science and artificial intelligence. Developers can often write and test an idea quickly without dealing with large amounts of complicated syntax.
+        </p>
+
+        <p>
+          Python is not the best tool for every job, but its flexibility makes it useful across many different areas of computing.
+        </p>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal4" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">How Data Turns Into Decisions</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=85" class="img-fluid rounded mb-3" alt="Data visualization charts and graphs">
+
+        <span class="badge bg-warning text-dark mb-2">Data Science</span>
+
+        <p>
+          Raw data doesn't tell anyone what to do. A spreadsheet full of numbers has no opinion. The useful work happens in between: cleaning the data, deciding what to measure and framing it as a question someone can actually act on.
+        </p>
+
+        <p>
+          "Sales dropped 12% in March" is a fact. Adding context can make that fact useful. If the drop is concentrated in one region or connected to a specific event, the business now has something it can investigate.
+        </p>
+
+        <p>
+          That is why data work is not only about calculations. It is also about asking the right question and presenting the answer clearly enough for someone to make a decision.
+        </p>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal5" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Responsive Design Explained</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=85" class="img-fluid rounded mb-3" alt="Website displayed across different devices">
+
+        <span class="badge bg-success mb-2">Web Development</span>
+
+        <p>
+          Responsive design means one website adapts to whatever screen it is opened on instead of requiring separate websites for phones and desktops.
+        </p>
+
+        <p>
+          A flexible grid allows columns to resize and wrap as the screen becomes smaller. Media queries allow CSS rules to change at specific screen widths.
+        </p>
+
+        <p>
+          Together, these techniques allow developers to build a layout once and adjust the important details for phones, tablets and larger screens.
+        </p>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal6" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Getting Started With Machine Learning</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=85" class="img-fluid rounded mb-3" alt="Artificial intelligence and machine learning concept">
+
+        <span class="badge bg-info text-dark mb-2">AI</span>
+
+        <p>
+          At its core, machine learning is pattern matching. A model receives examples and learns patterns that can later be used to make predictions about new examples.
+        </p>
+
+        <p>
+          You do not need a research background to start. A dataset containing house prices and features such as size, location and age can be used to train a basic model that predicts the price of a new house.
+        </p>
+
+        <p>
+          The difficult part is often not the algorithm. Clean data, useful features and a clearly defined question are usually more important for a beginner project.
+        </p>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
