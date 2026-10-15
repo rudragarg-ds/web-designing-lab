@@ -1,75 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Web Development Guide</title>
-    <meta name="description" content="A simple guide to web development for students.">
-    <meta name="keywords" content="web development, HTML, CSS, JavaScript">
-    <meta name="author" content="Rudra Garg">
+  <title>Web Development Guide | Rudra Garg</title>
+  <meta
+    name="description"
+    content="A beginner-friendly guide to web development, covering HTML, CSS, JavaScript, accessibility, and responsive design."
+  >
+  <meta name="author" content="Rudra Garg">
+  <meta name="theme-color" content="#172554">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Web Development Guide">
+  <meta
+    property="og:description"
+    content="Learn the basics of HTML, CSS, JavaScript, accessibility, and responsive design."
+  >
+
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
 
-    <header>
-        <h1>Web Development Guide</h1>
+  <header class="site-header">
+    <div class="container">
+      <p class="eyebrow">A beginner’s guide</p>
+      <h1>Web Development</h1>
+      <p class="intro">
+        The building blocks behind the websites we use every day.
+      </p>
 
-        <nav aria-label="Main navigation">
-            <a href="#about">About</a>
-            <a href="#topics">Topics</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
+      <nav aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="#about">About</a></li>
+          <li><a href="#topics">Core topics</a></li>
+          <li><a href="#accessibility">Accessibility</a></li>
+          <li><a href="#resources">Resources</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-    <main>
+  <main id="main-content" class="container">
+    <section id="about" class="panel" aria-labelledby="about-heading">
+      <h2 id="about-heading">What is web development?</h2>
+      <p>
+        Web development is the work of creating and maintaining websites.
+        It combines page structure, visual design, and interactive behavior
+        to make useful experiences in a browser.
+      </p>
+    </section>
 
-        <section id="about">
-            <h2>About Web Development</h2>
-            <p>
-                Web development involves creating and maintaining websites
-                using technologies such as HTML, CSS and JavaScript.
-            </p>
-        </section>
+    <section id="topics" class="panel" aria-labelledby="topics-heading">
+      <h2 id="topics-heading">Core topics</h2>
 
-        <section id="topics">
-            <h2>Basic Topics</h2>
+      <div class="topic-grid">
+        <article class="topic-card">
+          <h3>HTML</h3>
+          <p>
+            HTML gives a page its structure. Use elements such as headings,
+            paragraphs, lists, and links to describe the meaning of content.
+          </p>
+        </article>
 
-            <article>
-                <h3>HTML</h3>
-                <p>HTML provides the structure of a webpage.</p>
-            </article>
+        <article class="topic-card">
+          <h3>CSS</h3>
+          <p>
+            CSS controls presentation, including colors, spacing, typography,
+            and how content is arranged on different screen sizes.
+          </p>
+        </article>
 
-            <article>
-                <h3>CSS</h3>
-                <p>CSS is used to style and design a webpage.</p>
-            </article>
+        <article class="topic-card">
+          <h3>JavaScript</h3>
+          <p>
+            JavaScript adds behavior, such as responding to user actions,
+            updating page content, and loading data.
+          </p>
+        </article>
+      </div>
+    </section>
 
-            <article>
-                <h3>JavaScript</h3>
-                <p>JavaScript adds interactivity to a webpage.</p>
-            </article>
-        </section>
+    <section
+      id="accessibility"
+      class="panel"
+      aria-labelledby="accessibility-heading"
+    >
+      <h2 id="accessibility-heading">Build for everyone</h2>
+      <p>
+        Accessible websites work for people using keyboards, screen readers,
+        and other assistive technology. Start with semantic HTML, clear
+        labels, visible focus styles, and sufficient color contrast.
+      </p>
+      <ul>
+        <li>Use headings in a logical order.</li>
+        <li>Give form controls clear labels.</li>
+        <li>Write descriptive link text.</li>
+        <li>Make sure interactive controls work with a keyboard.</li>
+      </ul>
+    </section>
 
-        <section id="contact">
-            <h2>Contact</h2>
+    <section id="resources" class="panel" aria-labelledby="resources-heading">
+      <h2 id="resources-heading">Keep learning</h2>
+      <p>
+        Try changing the styles in this page’s stylesheet, then resize your
+        browser to see how the layout responds.
+      </p>
+      <p>
+        <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development">
+          Explore the MDN Web Development guides
+        </a>
+      </p>
+    </section>
+  </main>
 
-            <form>
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name">
-
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email">
-
-                <button type="submit">Send</button>
-            </form>
-        </section>
-
-    </main>
-
-    <footer>
-        <p>Web Development Guide - Rudra Garg</p>
-    </footer>
-
+  <footer class="site-footer">
+    <div class="container">
+      <p>Web Development Guide · Rudra Garg</p>
+      <a href="../">Back to Web Designing Lab</a>
+    </div>
+  </footer>
 </body>
 </html>
