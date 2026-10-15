@@ -308,3 +308,11 @@ weatherForm.addEventListener("submit", function(event) {
         });
 
 });
+
+// Quick-search buttons
+document.querySelectorAll(".quick-city").forEach(function(button) {
+    button.addEventListener("click", function() {
+        cityInput.value = button.dataset.city;
+        weatherForm.requestSubmit();
+    });
+});
