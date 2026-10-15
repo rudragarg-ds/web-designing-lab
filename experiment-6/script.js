@@ -72,7 +72,7 @@ subscribeForm.addEventListener("submit", function(event) {
     return;
   }
 
-  message.textContent = "Thanks! The email has been subscribed.";
+  message.textContent = "Demo complete: the email format is valid, but no subscription was created.";
   message.className = "mt-2 mb-0 text-success";
 
   emailInput.value = "";
