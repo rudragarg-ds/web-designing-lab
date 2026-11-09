@@ -34,7 +34,6 @@ function loadNotes() {
     try {
         const saved = localStorage.getItem(STORAGE_KEY);
         if (!saved) return SAMPLE_NOTES;
-
         const parsed = JSON.parse(saved);
         return Array.isArray(parsed) ? parsed : SAMPLE_NOTES;
     } catch (error) {
@@ -52,81 +51,56 @@ function formatDate(value) {
     }).format(date);
 }
 
-function makeId() {
-    return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
-}
-
 function NoteEditor({ note, onSave, onCancel }) {
     const [title, setTitle] = useState(note ? note.title : "");
     const [content, setContent] = useState(note ? note.content : "");
-    const [category, setCategory] = useState(note ? note.category : "Personal");
+    const [category, setCategory] = useState(note ? note.category || "Personal" : "Personal");
 
     function handleSubmit(event) {
         event.preventDefault();
         if (!title.trim() || !content.trim()) return;
-        onSave({
-            title: title.trim(),
-            content: content.trim(),
-            category
-        });
+        onSave({ title: title.trim(), content: content.trim(), category });
     }
 
     return (
-        <form className="editor-panel" onSubmit={handleSubmit}>
+        <form className="editor" onSubmit={handleSubmit}>
             <div className="editor-heading">
-                <div>
-                    <p className="eyebrow">{note ? "EDIT NOTE" : "QUICK CAPTURE"}</p>
-                    <h2>{note ? "Make a thoughtful update" : "Create a new note"}</h2>
-                </div>
-                <button
-                    className="icon-button close-editor"
-                    type="button"
-                    onClick={onCancel}
-                    aria-label="Close editor"
-                >
-                    ×
-                </button>
+                <h2>{note ? "Edit note" : "New note"}</h2>
+                <button className="text-button" type="button" onClick={onCancel}>Cancel</button>
             </div>
-            <label className="field-label" htmlFor="note-title">Title</label>
-            <input
-                id="note-title"
-                className="text-field"
-                value={title}
-                onChange={(event) => setTitle(event.target.value)}
-                placeholder="Give your note a clear title"
-                maxLength="100"
-                required
-            />
-            <div className="field-row">
-                <label className="field-label" htmlFor="note-category">Category</label>
-                <select
-                    id="note-category"
-                    className="text-field category-select"
-                    value={category}
-                    onChange={(event) => setCategory(event.target.value)}
-                >
-                    {CATEGORIES.map((item) => (
-                        <option key={item} value={item}>{item}</option>
-                    ))}
-                </select>
+            <div className="editor-fields">
+                <label>
+                    <span>Title</span>
+                    <input
+                        value={title}
+                        onChange={(event) => setTitle(event.target.value)}
+                        placeholder="Note title"
+                        maxLength="100"
+                        required
+                    />
+                </label>
+                <label>
+                    <span>Category</span>
+                    <select value={category} onChange={(event) => setCategory(event.target.value)}>
+                        {CATEGORIES.map((item) => <option key={item}>{item}</option>)}
+                    </select>
+                </label>
+                <label className="content-field">
+                    <span>Note</span>
+                    <textarea
+                        value={content}
+                        onChange={(event) => setContent(event.target.value)}
+                        placeholder="Write something to remember..."
+                        rows="4"
+                        required
+                    ></textarea>
+                </label>
             </div>
-            <label className="field-label" htmlFor="note-content">Your note</label>
-            <textarea
-                id="note-content"
-                className="text-field note-input"
-                value={content}
-                onChange={(event) => setContent(event.target.value)}
-                placeholder="Write down the details you want to remember..."
-                rows="5"
-                required
-            ></textarea>
             <div className="editor-actions">
                 <button className="button button-primary" type="submit">
                     {note ? "Save changes" : "Add note"}
                 </button>
-                <button className="button button-quiet" type="button" onClick={onCancel}>
-                    Cancel
-                </button>
+                <button className="button button-secondary" type="button" onClick={onCancel}>Cancel</button>
             </div>
         </form>
     );
@@ -135,35 +109,25 @@ function NoteEditor({ note, onSave, onCancel }) {
 function NoteCard({ note, onEdit, onDelete, onToggleFavorite }) {
     return (
         <article className="note-card">
-            <div className="note-card-top">
-                <span className={"category-pill category-" + note.category.toLowerCase()}>
-                    {note.category}
-                </span>
+            <div className="card-heading">
+                <span className="category-label">{note.category || "Personal"}</span>
                 <button
-                    className={"favorite-button" + (note.favorite ? " is-favorite" : "")}
+                    className={"favorite-button" + (note.favorite ? " selected" : "")}
                     type="button"
                     onClick={() => onToggleFavorite(note.id)}
-                    aria-label={note.favorite ? "Remove from favorites" : "Add to favorites"}
+                    aria-label={note.favorite ? "Remove favorite" : "Add favorite"}
                     aria-pressed={Boolean(note.favorite)}
                 >
                     {note.favorite ? "★" : "☆"}
                 </button>
             </div>
-            <h2>{note.title}</h2>
-            <p className="note-content">{note.content}</p>
-            <div className="note-card-bottom">
-                <span className="updated-date">Updated {formatDate(note.updatedAt)}</span>
+            <h3>{note.title}</h3>
+            <p className="note-text">{note.content}</p>
+            <div className="card-bottom">
+                <span className="date-label">Updated {formatDate(note.updatedAt)}</span>
                 <div className="card-actions">
-                    <button className="card-action" type="button" onClick={() => onEdit(note.id)}>
-                        Edit
-                    </button>
-                    <button
-                        className="card-action delete-action"
-                        type="button"
-                        onClick={() => onDelete(note.id)}
-                    >
-                        Delete
-                    </button>
+                    <button className="text-button" type="button" onClick={() => onEdit(note.id)}>Edit</button>
+                    <button className="text-button delete-button" type="button" onClick={() => onDelete(note.id)}>Delete</button>
                 </div>
             </div>
         </article>
@@ -172,10 +136,10 @@ function NoteCard({ note, onEdit, onDelete, onToggleFavorite }) {
 
 function App() {
     const [notes, setNotes] = useState(loadNotes);
-    const [activeView, setActiveView] = useState("all");
-    const [activeCategory, setActiveCategory] = useState("");
     const [search, setSearch] = useState("");
+    const [categoryFilter, setCategoryFilter] = useState("All categories");
     const [sortBy, setSortBy] = useState("recent");
+    const [favoritesOnly, setFavoritesOnly] = useState(false);
     const [editingId, setEditingId] = useState(null);
     const [isCreating, setIsCreating] = useState(false);
 
@@ -183,7 +147,7 @@ function App() {
         try {
             localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
         } catch (error) {
-            // The notes remain usable for this session if storage is unavailable.
+            // Notes stay available for this session if browser storage is unavailable.
         }
     }, [notes]);
 
@@ -191,34 +155,24 @@ function App() {
     const favoriteCount = notes.filter((note) => note.favorite).length;
 
     const visibleNotes = useMemo(() => {
-        const normalizedSearch = search.trim().toLowerCase();
-        const result = notes.filter((note) => {
-            const matchesView = activeView !== "favorites" || note.favorite;
-            const matchesCategory = !activeCategory || note.category === activeCategory;
-            const matchesSearch = !normalizedSearch ||
-                (note.title + " " + note.content + " " + note.category)
+        const query = search.trim().toLowerCase();
+        const filtered = notes.filter((note) => {
+            const matchesFavorite = !favoritesOnly || note.favorite;
+            const matchesCategory = categoryFilter === "All categories" || note.category === categoryFilter;
+            const matchesSearch = !query ||
+                (note.title + " " + note.content + " " + (note.category || ""))
                     .toLowerCase()
-                    .includes(normalizedSearch);
-            return matchesView && matchesCategory && matchesSearch;
+                    .includes(query);
+            return matchesFavorite && matchesCategory && matchesSearch;
         });
 
-        return result.sort((first, second) => {
-            if (sortBy === "title") return first.title.localeCompare(second.title);
-            return new Date(second.updatedAt) - new Date(first.updatedAt);
-        });
-    }, [notes, activeView, activeCategory, search, sortBy]);
+        return filtered.sort((a, b) => sortBy === "title"
+            ? a.title.localeCompare(b.title)
+            : new Date(b.updatedAt) - new Date(a.updatedAt)
+        );
+    }, [notes, search, categoryFilter, sortBy, favoritesOnly]);
 
-    function openCreateForm() {
-        setEditingId(null);
-        setIsCreating(true);
-    }
-
-    function openEditForm(id) {
-        setIsCreating(false);
-        setEditingId(id);
-    }
-
-    function closeForm() {
+    function closeEditor() {
         setIsCreating(false);
         setEditingId(null);
     }
@@ -226,171 +180,121 @@ function App() {
     function saveNote(data) {
         const updatedAt = new Date().toISOString();
         if (editingNote) {
-            setNotes((currentNotes) => currentNotes.map((note) =>
+            setNotes((current) => current.map((note) =>
                 note.id === editingNote.id ? { ...note, ...data, updatedAt } : note
             ));
         } else {
-            setNotes((currentNotes) => [
-                { id: makeId(), ...data, favorite: false, updatedAt },
-                ...currentNotes
+            const id = Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+            setNotes((current) => [
+                { id, ...data, favorite: false, updatedAt },
+                ...current
             ]);
         }
-        closeForm();
+        closeEditor();
     }
 
     function deleteNote(id) {
-        if (!window.confirm("Delete this note? This cannot be undone.")) return;
-        setNotes((currentNotes) => currentNotes.filter((note) => note.id !== id));
-        if (editingId === id) closeForm();
+        if (!window.confirm("Delete this note?")) return;
+        setNotes((current) => current.filter((note) => note.id !== id));
+        if (editingId === id) closeEditor();
     }
 
     function toggleFavorite(id) {
-        setNotes((currentNotes) => currentNotes.map((note) =>
+        setNotes((current) => current.map((note) =>
             note.id === id ? { ...note, favorite: !note.favorite } : note
         ));
     }
 
-    function showAllNotes() {
-        setActiveView("all");
-        setActiveCategory("");
-    }
-
-    function showFavorites() {
-        setActiveView("favorites");
-        setActiveCategory("");
-    }
-
     return (
-        <div className="workspace">
-            <aside className="sidebar">
-                <a className="brand" href="#" aria-label="Noted home" onClick={showAllNotes}>
-                    <span className="brand-mark">n</span>
-                    <span>noted<span className="brand-dot">.</span></span>
-                </a>
-
-                <button className="button button-primary create-button" type="button" onClick={openCreateForm}>
-                    <span aria-hidden="true">＋</span> Create a note
+        <div className="page">
+            <header className="page-header">
+                <div>
+                    <p className="course-label">WEB DESIGNING LAB · EXPERIMENT 07</p>
+                    <h1>My Notes</h1>
+                    <p className="subtitle">Keep study reminders and project ideas in one place.</p>
+                </div>
+                <button
+                    className="button button-primary new-note-button"
+                    type="button"
+                    onClick={() => {
+                        setEditingId(null);
+                        setIsCreating(true);
+                    }}
+                >
+                    + New note
                 </button>
+            </header>
 
-                <div className="sidebar-section">
-                    <p className="sidebar-label">WORKSPACE</p>
-                    <button
-                        className={"nav-item" + (activeView === "all" && !activeCategory ? " active" : "")}
-                        type="button"
-                        onClick={showAllNotes}
-                    >
-                        <span className="nav-icon" aria-hidden="true">▤</span>
-                        <span>All notes</span>
-                        <span className="nav-count">{notes.length}</span>
-                    </button>
-                    <button
-                        className={"nav-item" + (activeView === "favorites" ? " active" : "")}
-                        type="button"
-                        onClick={showFavorites}
-                    >
-                        <span className="nav-icon star-icon" aria-hidden="true">☆</span>
-                        <span>Favorites</span>
-                        <span className="nav-count">{favoriteCount}</span>
-                    </button>
-                </div>
-
-                <div className="sidebar-section category-section">
-                    <p className="sidebar-label">CATEGORIES</p>
-                    {CATEGORIES.map((category) => (
-                        <button
-                            className={"nav-item category-nav" + (activeCategory === category ? " active" : "")}
-                            key={category}
-                            type="button"
-                            onClick={() => {
-                                setActiveView("all");
-                                setActiveCategory(activeCategory === category ? "" : category);
-                            }}
-                        >
-                            <span className={"category-dot category-dot-" + category.toLowerCase()}></span>
-                            <span>{category}</span>
-                            <span className="nav-count">
-                                {notes.filter((note) => note.category === category).length}
-                            </span>
-                        </button>
-                    ))}
-                </div>
-
-                <div className="sidebar-footer">
-                    <span className="avatar">RG</span>
-                    <span className="profile-copy">
-                        <strong>Rudra Garg</strong>
-                        <small>Personal workspace</small>
-                    </span>
-                    <span className="online-dot" aria-label="Saved locally"></span>
-                </div>
-            </aside>
-
-            <main className="main-content">
-                <header className="topbar">
-                    <div className="breadcrumb">WORKSPACE <span>/</span> NOTES</div>
-                    <div className="save-status"><span></span> Saved in this browser</div>
-                </header>
-
-                <section className="page-heading">
-                    <div>
-                        <p className="eyebrow">YOUR PERSONAL SPACE</p>
-                        <h1>{activeView === "favorites" ? "Favorite notes" : activeCategory || "My notes"}</h1>
-                        <p className="page-description">
-                            Keep your thoughts organized and find the right idea when you need it.
-                        </p>
-                    </div>
-                    <button className="button button-primary heading-create" type="button" onClick={openCreateForm}>
-                        <span aria-hidden="true">＋</span> New note
-                    </button>
-                </section>
-
-                <section className="notes-toolbar" aria-label="Find and sort notes">
-                    <label className="search-box">
-                        <span className="search-icon" aria-hidden="true">⌕</span>
+            <main>
+                <section className="toolbar" aria-label="Find and organize notes">
+                    <label className="search-field">
+                        <span aria-hidden="true">⌕</span>
                         <input
                             type="search"
                             value={search}
                             onChange={(event) => setSearch(event.target.value)}
-                            placeholder="Search your notes..."
+                            placeholder="Search notes"
                             aria-label="Search notes"
                         />
-                        <span className="shortcut">⌘ K</span>
                     </label>
-                    <label className="sort-control">
-                        <span>Sort by</span>
-                        <select value={sortBy} onChange={(event) => setSortBy(event.target.value)} aria-label="Sort notes">
+                    <label className="select-field">
+                        <span className="visually-hidden">Filter by category</span>
+                        <select value={categoryFilter} onChange={(event) => setCategoryFilter(event.target.value)}>
+                            <option>All categories</option>
+                            {CATEGORIES.map((item) => <option key={item}>{item}</option>)}
+                        </select>
+                    </label>
+                    <label className="select-field sort-field">
+                        <span className="visually-hidden">Sort notes</span>
+                        <select value={sortBy} onChange={(event) => setSortBy(event.target.value)}>
                             <option value="recent">Recently updated</option>
-                            <option value="title">Title</option>
+                            <option value="title">Title A-Z</option>
                         </select>
                     </label>
                 </section>
 
+                <nav className="note-tabs" aria-label="Note views">
+                    <button
+                        className={!favoritesOnly ? "tab active" : "tab"}
+                        type="button"
+                        onClick={() => setFavoritesOnly(false)}
+                    >
+                        All notes <span>{notes.length}</span>
+                    </button>
+                    <button
+                        className={favoritesOnly ? "tab active" : "tab"}
+                        type="button"
+                        onClick={() => setFavoritesOnly(true)}
+                    >
+                        Favorites <span>{favoriteCount}</span>
+                    </button>
+                </nav>
+
                 {(isCreating || editingNote) && (
                     <NoteEditor
-                        key={editingNote ? editingNote.id : "create"}
+                        key={editingNote ? editingNote.id : "new"}
                         note={editingNote}
                         onSave={saveNote}
-                        onCancel={closeForm}
+                        onCancel={closeEditor}
                     />
                 )}
 
-                <section className="notes-area" aria-labelledby="notes-title">
-                    <div className="notes-area-heading">
-                        <div>
-                            <h2 id="notes-title">
-                                {activeView === "favorites" ? "Your favorites" : activeCategory || "All notes"}
-                            </h2>
-                            <p>{visibleNotes.length} {visibleNotes.length === 1 ? "note" : "notes"} in this view</p>
-                        </div>
+                <section className="notes-section" aria-labelledby="notes-heading">
+                    <div className="section-heading">
+                        <h2 id="notes-heading">{favoritesOnly ? "Favorite notes" : "Your notes"}</h2>
+                        <span>{visibleNotes.length} {visibleNotes.length === 1 ? "note" : "notes"}</span>
                     </div>
 
-                    {visibleNotes.length > 0 ? (
-                        <div className="note-grid">
+                    {visibleNotes.length ? (
+                        <div className="notes-grid">
                             {visibleNotes.map((note) => (
                                 <NoteCard
                                     key={note.id}
                                     note={note}
-                                    onEdit={openEditForm}
+                                    onEdit={(id) => {
+                                        setIsCreating(false);
+                                        setEditingId(id);
+                                    }}
                                     onDelete={deleteNote}
                                     onToggleFavorite={toggleFavorite}
                                 />
@@ -398,23 +302,28 @@ function App() {
                         </div>
                     ) : (
                         <div className="empty-state">
-                            <span className="empty-icon" aria-hidden="true">⌕</span>
-                            <h3>{search ? "No matching notes" : "Nothing here yet"}</h3>
-                            <p>{search ? "Try another search term or clear your search." : "Create a note to start building your collection."}</p>
+                            <h3>{search ? "No matching notes" : "No notes here yet"}</h3>
+                            <p>{search ? "Try a different search or change the filters." : "Add a note to get started."}</p>
                             {!search && (
-                                <button className="button button-primary" type="button" onClick={openCreateForm}>
-                                    Create your first note
+                                <button
+                                    className="button button-secondary"
+                                    type="button"
+                                    onClick={() => {
+                                        setEditingId(null);
+                                        setIsCreating(true);
+                                    }}
+                                >
+                                    Create a note
                                 </button>
                             )}
                         </div>
                     )}
                 </section>
-
-                <footer className="main-footer">
-                    <span>Noted keeps your ideas close.</span>
-                    <span>Your notes are stored locally on this device.</span>
-                </footer>
             </main>
+
+            <footer className="page-footer">
+                Changes are saved in this browser.
+            </footer>
         </div>
     );
 }
