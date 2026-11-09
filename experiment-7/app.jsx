@@ -1,73 +1,88 @@
-const { useState, useEffect } = React;
-const STORAGE_KEY = "experiment7-notes";
+const { useEffect, useState } = React;
+
+const STORAGE_KEY = "experiment7-notes-v2";
+const SAMPLE_NOTES = [
+    {
+        id: "react-hooks",
+        title: "React hooks",
+        content: "useState keeps the note data and useEffect saves it to localStorage.",
+        updated: "28 Oct 2026, 2:17 am"
+    },
+    {
+        id: "data-analytics",
+        title: "Data Analytics",
+        content: "Revise Unit I and Unit II for the CIE.",
+        updated: "28 Oct 2026, 2:17 am"
+    },
+    {
+        id: "web-designing-lab",
+        title: "Web Designing Lab",
+        content: "Finish Experiment 7 and update the practical record PDF.",
+        updated: "28 Oct 2026, 2:17 am"
+    }
+];
 
 function loadNotes() {
     try {
         const saved = localStorage.getItem(STORAGE_KEY);
-        const parsed = saved ? JSON.parse(saved) : [];
-        return Array.isArray(parsed) ? parsed : [];
+        if (!saved) return SAMPLE_NOTES;
+
+        const parsed = JSON.parse(saved);
+        return Array.isArray(parsed) ? parsed : SAMPLE_NOTES;
     } catch (error) {
-        return [];
+        return SAMPLE_NOTES;
     }
 }
 
 function formatDate() {
     return new Date().toLocaleString("en-IN", {
-        dateStyle: "medium",
-        timeStyle: "short"
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "numeric",
+        minute: "2-digit"
     });
 }
 
 function NoteForm({ editingNote, onSave, onCancel }) {
     const [title, setTitle] = useState(editingNote ? editingNote.title : "");
-    const [content, setContent] = useState(
-        editingNote ? editingNote.content : ""
-    );
+    const [content, setContent] = useState(editingNote ? editingNote.content : "");
 
     function handleSubmit(event) {
         event.preventDefault();
         if (!title.trim() || !content.trim()) return;
 
-        onSave({
-            title: title.trim(),
-            content: content.trim()
-        });
+        onSave({ title: title.trim(), content: content.trim() });
         setTitle("");
         setContent("");
     }
 
     return (
         <form className="note-form" onSubmit={handleSubmit}>
-            <label htmlFor="note-title">Title</label>
             <input
-                id="note-title"
                 type="text"
                 value={title}
                 onChange={(event) => setTitle(event.target.value)}
-                placeholder="Give your note a title"
+                placeholder="Note title"
                 aria-label="Note title"
                 required
             />
-
-            <label htmlFor="note-content">Your note</label>
             <textarea
-                id="note-content"
                 value={content}
                 onChange={(event) => setContent(event.target.value)}
-                placeholder="Write your thoughts here..."
+                placeholder="Write your note here..."
                 aria-label="Note content"
                 rows="4"
                 required
             ></textarea>
-
             <div className="form-buttons">
                 <button className="primary-button" type="submit">
                     {editingNote ? "Update Note" : "Add Note"}
                 </button>
                 {editingNote && (
                     <button
-                        type="button"
                         className="secondary-button"
+                        type="button"
                         onClick={onCancel}
                     >
                         Cancel
@@ -81,25 +96,23 @@ function NoteForm({ editingNote, onSave, onCancel }) {
 function NoteItem({ note, onEdit, onDelete }) {
     return (
         <li className="note-card">
-            <div className="note-card-content">
-                <h2>{note.title}</h2>
-                <p>{note.content}</p>
-                <small>Last updated: {note.updated}</small>
-            </div>
+            <h2>{note.title}</h2>
+            <p>{note.content}</p>
+            <small>{note.updated}</small>
             <div className="note-buttons">
                 <button
-                    type="button"
                     className="secondary-button"
+                    type="button"
                     onClick={() => onEdit(note.id)}
-                    aria-label={"Edit note: " + note.title}
+                    aria-label={`Edit note: ${note.title}`}
                 >
                     Edit
                 </button>
                 <button
-                    type="button"
                     className="danger-button"
+                    type="button"
                     onClick={() => onDelete(note.id)}
-                    aria-label={"Delete note: " + note.title}
+                    aria-label={`Delete note: ${note.title}`}
                 >
                     Delete
                 </button>
@@ -110,13 +123,13 @@ function NoteItem({ note, onEdit, onDelete }) {
 
 function App() {
     const [notes, setNotes] = useState(loadNotes);
-    const [editingId, setEditingId] = useState(null);
+    const [editingId, setEditingId] = useState("data-analytics");
 
     useEffect(() => {
         try {
             localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
         } catch (error) {
-            // Notes remain available in memory if browser storage is unavailable.
+            // Notes stay available until this page is closed if storage is unavailable.
         }
     }, [notes]);
 
@@ -132,88 +145,51 @@ function App() {
                 )
             );
             setEditingId(null);
-        } else {
-            const newNote = {
-                id: Date.now(),
-                ...data,
-                updated: formatDate()
-            };
-            setNotes((currentNotes) => [newNote, ...currentNotes]);
+            return;
         }
+
+        setNotes((currentNotes) => [
+            { id: Date.now(), ...data, updated: formatDate() },
+            ...currentNotes
+        ]);
     }
 
     function deleteNote(id) {
         if (!window.confirm("Delete this note?")) return;
-
-        setNotes((currentNotes) =>
-            currentNotes.filter((note) => note.id !== id)
-        );
-
+        setNotes((currentNotes) => currentNotes.filter((note) => note.id !== id));
         if (editingId === id) setEditingId(null);
     }
 
     return (
-        <main className="app-shell">
-            <header className="app-header">
-                <p className="eyebrow">YOUR PERSONAL SPACE</p>
-                <h1>My Notes<span>.</span></h1>
-                <p className="subtitle">
-                    Capture ideas, keep track of thoughts, and come back to them anytime.
+        <main className="app">
+            <h1>My Notes</h1>
+            <p className="note-count" aria-live="polite">
+                {notes.length} {notes.length === 1 ? "note" : "notes"}
+            </p>
+
+            <NoteForm
+                key={editingNote ? editingNote.id : "new-note"}
+                editingNote={editingNote}
+                onSave={saveNote}
+                onCancel={() => setEditingId(null)}
+            />
+
+            {notes.length === 0 ? (
+                <p className="empty" role="status">
+                    No notes yet. Add your first note above.
                 </p>
-            </header>
-
-            <section className="composer-panel" aria-labelledby="composer-title">
-                <div className="section-heading">
-                    <div>
-                        <p className="eyebrow">QUICK CAPTURE</p>
-                        <h2 id="composer-title">
-                            {editingNote ? "Edit your note" : "Create a note"}
-                        </h2>
-                    </div>
-                </div>
-                <NoteForm
-                    key={editingNote ? editingNote.id : "new"}
-                    editingNote={editingNote}
-                    onSave={saveNote}
-                    onCancel={() => setEditingId(null)}
-                />
-            </section>
-
-            <section className="notes-section" aria-labelledby="notes-heading">
-                <div className="notes-heading">
-                    <div>
-                        <p className="eyebrow">YOUR COLLECTION</p>
-                        <h2 id="notes-heading">All notes</h2>
-                    </div>
-                    <p className="note-count" aria-live="polite">
-                        <strong>{notes.length}</strong>
-                        {notes.length === 1 ? " note" : " notes"}
-                    </p>
-                </div>
-
-                {notes.length === 0 ? (
-                    <div className="empty-state" role="status">
-                        <div className="empty-icon" aria-hidden="true">✎</div>
-                        <h3>Nothing here yet</h3>
-                        <p>Add your first note above. It will appear here and stay saved in this browser.</p>
-                    </div>
-                ) : (
-                    <ul className="note-list">
-                        {notes.map((note) => (
-                            <NoteItem
-                                key={note.id}
-                                note={note}
-                                onEdit={setEditingId}
-                                onDelete={deleteNote}
-                            />
-                        ))}
-                    </ul>
-                )}
-            </section>
-
-            <footer className="app-footer">
-                Notes are saved locally in this browser using localStorage.
-            </footer>
+            ) : (
+                <ul className="note-list">
+                    {notes.map((note) => (
+                        <NoteItem
+                            key={note.id}
+                            note={note}
+                            onEdit={setEditingId}
+                            onDelete={deleteNote}
+                        />
+                    ))}
+                </ul>
+            )}
         </main>
     );
 }
