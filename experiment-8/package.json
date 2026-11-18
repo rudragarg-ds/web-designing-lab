@@ -1,0 +1,16 @@
+{
+  "name": "experiment-8-book-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A simple Express REST API for CRUD operations on a book collection.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
