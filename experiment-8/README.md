@@ -1,39 +1,46 @@
 # Experiment 8: Book Collection REST API
 
-A Node.js and Express API for creating and managing a small book collection. Book data is stored in data/books.json, so it remains available after the server restarts.
+A small book catalogue built with **Node.js**, **Express**, and a browser interface. The page at the root lets you add, view, edit, search, and remove books. Each action uses the REST API and saves the collection in `data/books.json`.
 
 ## Requirements
 
 - Node.js 18 or newer
 - npm
 
-## Run the API
+## Run the experiment
 
-From this folder, install the dependency and start the server:
+Open a terminal in this folder and run:
 
 ~~~sh
 npm install
 npm start
 ~~~
 
-The API runs at http://localhost:3000. Open that address to see the available routes. Sample books are included in data/books.json.
+Keep the terminal running, then open **http://localhost:3000** in your browser. The Book Shelf page is the visual demonstration for the practical.
 
-## Endpoints
+## Use the page
+
+1. Add a book with its title and author. Year and genre are optional.
+2. Search the shelf by title, author, or genre.
+3. Select **Edit** to change a book, or **Remove** to delete it.
+4. Refresh the page to confirm that changes were saved.
+
+## REST API endpoints
 
 | Method | Route | Action |
 | --- | --- | --- |
-| GET | /api/books | List all books |
-| GET | /api/books/:id | Get one book |
-| POST | /api/books | Add a book |
-| PUT | /api/books/:id | Replace a book |
-| PATCH | /api/books/:id | Update selected book fields |
-| DELETE | /api/books/:id | Delete a book |
+| GET | `/api/books` | List all books |
+| GET | `/api/books/:id` | Get one book |
+| POST | `/api/books` | Add a book |
+| PUT | `/api/books/:id` | Replace a book |
+| PATCH | `/api/books/:id` | Update selected fields |
+| DELETE | `/api/books/:id` | Delete a book |
 
-Each book contains an id, title, author, year, genre, createdAt, and updatedAt. Title and author are required. The year must be a positive whole number when provided.
+Open **http://localhost:3000/api** for the API summary, or **http://localhost:3000/api/books** to see the collection as JSON. Those addresses display data for API clients; the visual page is at the root address.
 
-## Try the API
+## Example requests
 
-List all books:
+List books:
 
 ~~~sh
 curl http://localhost:3000/api/books
@@ -47,36 +54,20 @@ curl -X POST http://localhost:3000/api/books \
   -d '{"title":"The Hobbit","author":"J. R. R. Tolkien","year":1937,"genre":"Fantasy"}'
 ~~~
 
-Use the id returned by the POST response to read, update, or delete that book:
+The create response includes the new book's `id`. Use that id in requests to read, update, or delete that book:
 
 ~~~sh
-curl http://localhost:3000/api/books/book-001
+curl http://localhost:3000/api/books/BOOK_ID
 ~~~
 
-Replace a book:
-
 ~~~sh
-curl -X PUT http://localhost:3000/api/books/book-001 \
+curl -X PATCH http://localhost:3000/api/books/BOOK_ID \
   -H "Content-Type: application/json" \
-  -d '{"title":"The Alchemist","author":"Paulo Coelho","year":1988,"genre":"Adventure"}'
+  -d '{"genre":"Fantasy"}'
 ~~~
-
-Update only one field:
 
 ~~~sh
-curl -X PATCH http://localhost:3000/api/books/book-001 \
-  -H "Content-Type: application/json" \
-  -d '{"genre":"Fiction"}'
+curl -X DELETE http://localhost:3000/api/books/BOOK_ID
 ~~~
 
-Delete a book:
-
-~~~sh
-curl -X DELETE http://localhost:3000/api/books/book-001
-~~~
-
-The sample ids work for the included books until you delete or replace them. The API returns JSON errors for invalid input, unknown routes, and missing book ids.
-
-## Note
-
-This is a server-side Node.js project. GitHub Pages can host the repository's static experiment pages, but the Express API itself must run on a Node.js server or on your computer with npm start.
+Each book has an id, title, author, year, genre, createdAt, and updatedAt. Title and author are required. The year, when provided, must be a positive whole number.
