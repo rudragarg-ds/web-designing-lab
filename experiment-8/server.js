@@ -10,6 +10,7 @@ const DATA_FILE = path.join(__dirname, "data", "books.json");
 let books = [];
 
 app.use(express.json({ limit: "50kb" }));
+app.use(express.static(path.join(__dirname, "public")));
 
 function asyncHandler(handler) {
     return (request, response, next) => {
@@ -76,10 +77,11 @@ async function loadBooks() {
     }
 }
 
-app.get("/", (request, response) => {
+app.get("/api", (request, response) => {
     response.json({
         name: "Book Collection API",
         version: "1.0.0",
+        interface: "/",
         endpoints: {
             list: "GET /api/books",
             get: "GET /api/books/:id",
