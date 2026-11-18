@@ -1,0 +1,29 @@
+[
+  {
+    "id": "book-001",
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "year": 1988,
+    "genre": "Fiction",
+    "createdAt": "2026-11-01T10:00:00.000Z",
+    "updatedAt": "2026-11-01T10:00:00.000Z"
+  },
+  {
+    "id": "book-002",
+    "title": "Atomic Habits",
+    "author": "James Clear",
+    "year": 2018,
+    "genre": "Self-help",
+    "createdAt": "2026-11-01T10:05:00.000Z",
+    "updatedAt": "2026-11-01T10:05:00.000Z"
+  },
+  {
+    "id": "book-003",
+    "title": "Wings of Fire",
+    "author": "A. P. J. Abdul Kalam",
+    "year": 1999,
+    "genre": "Autobiography",
+    "createdAt": "2026-11-01T10:10:00.000Z",
+    "updatedAt": "2026-11-01T10:10:00.000Z"
+  }
+]
