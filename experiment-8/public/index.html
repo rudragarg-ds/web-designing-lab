@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f0e6">
+  <title>Book Shelf | Experiment 8</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Book Shelf home"><span class="brand-mark">B</span><span>BOOKSHELF<span class="brand-sub">EXPERIMENT 08</span></span></a>
+    <a class="api-link" href="/api" target="_blank" rel="noreferrer">API details <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main>
+    <section class="intro">
+      <div class="intro-copy">
+        <p class="eyebrow"><span class="eyebrow-line"></span> NODE.JS · EXPRESS · CRUD</p>
+        <h1>A little room<br>for good books.</h1>
+        <p class="intro-text">Add a title, keep your collection in order, and see each change saved through the REST API.</p>
+      </div>
+      <aside class="connection-card" aria-live="polite">
+        <span class="connection-dot" id="connection-dot"></span>
+        <div><p class="connection-label">API CONNECTION</p><strong id="connection-status">Checking server…</strong></div>
+        <span class="connection-url">localhost:3000</span>
+      </aside>
+    </section>
+
+    <section class="summary" aria-label="Collection summary">
+      <div class="summary-item"><span class="summary-number" id="book-total">—</span><span class="summary-label">BOOKS IN YOUR SHELF</span></div>
+      <div class="summary-rule"></div>
+      <div class="summary-item"><span class="summary-number summary-word">Create · Read · Update · Delete</span><span class="summary-label">FOUR OPERATIONS, ONE COLLECTION</span></div>
+    </section>
+
+    <section class="workspace">
+      <section class="form-panel" aria-labelledby="form-title">
+        <div class="panel-heading"><span class="step-number">01</span><div><p class="eyebrow">THE CATALOGUE</p><h2 id="form-title">Add a book</h2></div></div>
+        <p class="panel-note">A title and author are all you need to get started.</p>
+        <form id="book-form">
+          <label for="title">Book title <span>*</span></label>
+          <input id="title" name="title" placeholder="e.g. The Hobbit" maxlength="120" required>
+          <label for="author">Author <span>*</span></label>
+          <input id="author" name="author" placeholder="e.g. J. R. R. Tolkien" maxlength="100" required>
+          <div class="field-row">
+            <div><label for="year">Year published</label><input id="year" name="year" type="number" min="1" max="9999" placeholder="Optional"></div>
+            <div><label for="genre">Genre</label><input id="genre" name="genre" placeholder="e.g. Fantasy" maxlength="60"></div>
+          </div>
+          <button class="primary-button" id="save-button" type="submit"><span id="save-label">Add to shelf</span><span aria-hidden="true">＋</span></button>
+          <button class="cancel-button" id="cancel-edit" type="button" hidden>Cancel editing</button>
+        </form>
+        <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+        <div class="form-footnote"><span>*</span> Required fields</div>
+      </section>
+
+      <section class="collection-panel" aria-labelledby="collection-title">
+        <div class="collection-heading">
+          <div class="panel-heading"><span class="step-number">02</span><div><p class="eyebrow">YOUR READING LIST</p><h2 id="collection-title">On the shelf</h2></div></div>
+          <span class="count-badge" id="visible-count">0 titles</span>
+        </div>
+        <div class="collection-tools"><label class="search-box"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Find a title or author" aria-label="Find a title or author"></label></div>
+        <div class="book-list" id="book-list" aria-live="polite"><p class="list-state">Loading your books…</p></div>
+      </section>
+    </section>
+
+    <section class="api-note">
+      <div class="api-note-icon" aria-hidden="true">{ }</div>
+      <div><p class="eyebrow">UNDER THE COVER</p><p>This page uses <code>GET</code>, <code>POST</code>, <code>PATCH</code>, and <code>DELETE</code> requests to manage books at <code>/api/books</code>.</p></div>
+      <a href="/api/books" target="_blank" rel="noreferrer">View JSON <span aria-hidden="true">↗</span></a>
+    </section>
+  </main>
+
+  <footer><span>WEB DESIGNING LAB <span class="footer-separator">/</span> EXPERIMENT 08</span><span>Node.js + Express book collection</span></footer>
+</body>
+</html>
